@@ -1,4 +1,11 @@
 Rails.application.routes.draw do
+  scope module: :admin do
+    devise_for :admins
+    get 'admins' => 'homes#top'
+    get 'admins/end_users' => 'end_users#index'
+    get 'admins/endusers/:id' => 'end_users#show'
+  end
+
   scope module: :public do
     root to: 'homes#top'
     get 'about' => 'homes#about'
@@ -13,13 +20,6 @@ Rails.application.routes.draw do
     get 'end_users/confirm' => 'end_users#confirm'
     patch 'end_users/withdraw' => 'end_users#withdraw'
   end
-
-  scope module: :admin do
-    devise_for :admins
-    get 'admins' => 'homes#top'
-  end
-
-
 
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
