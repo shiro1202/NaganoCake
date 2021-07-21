@@ -1,41 +1,16 @@
 <div class="container">
   <div class="row">
     <div class="col">
-    <%= flash[:success] %>
-    <h2>マイページ</h2>
-    <h4>登録情報</h4>
-    <%= link_to "編集する", end_users_edit_path, class: "col-xs-12 btn btn-primary" %>
-    <table class="table">
-      <tbody>
-        <tr>
-          <th scope="row">名前</th>
-          <td><%= @user.last_name %><%= @user.first_name %></td>
-        </tr>
-        <tr>
-          <th scope="row">カナ</th>
-          <td><%= @user.last_name_kana %><%= @user.first_name_kana %></td>
-        </tr>
-        <tr>
-          <th scope="row">郵便番号</th>
-          <td><%= @user.postal_code %></td>
-        </tr>
-        <tr>
-          <th scope="row">住所</th>
-          <td><%= @user.address %></td>
-        </tr>
-        <tr>
-          <th scope="row">電話番号</th>
-          <td><%= @user.telephone %></td>
-        </tr>
-        <tr>
-          <th scope="row">メールアドレス</th>
-          <td><%= @user.email%></td>
-        </tr>
-      </tbody>
-    </table>
-
-    <h4>配送先</h4><button class="btn btn-primary">一覧を見る</button>
-    <h4>注文履歴</h4><button class="btn btn-primary">一覧を見る</button>
-    </div>
+    <h2>商品一覧</h2>
+    
+    <% @items.each do |item| %>
+      <div class="card" style="width:300px;">
+        <%= attachment_image_tag(item, :image, fallback: "no-image-icon.jpg") %>
+        <%= item.name %>
+        <%= item.no_tax_price %>
+        <%= link_to "詳細を見る" %>
+      </div>
+    <% end %>
+    
   </div>
 </div>

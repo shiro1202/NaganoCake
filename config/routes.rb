@@ -12,8 +12,8 @@ Rails.application.routes.draw do
     patch 'admin/items/:id' => 'items#update'
     get 'admin/genres' => 'genres#index'
     post 'admin/genres' => 'genres#create'
-    get 'admin/genres/:id/edit' => 'genres#edit'
-    patch 'admin/genres/:id' => 'genres#update'
+    get 'admin/genres/:id/edit' => 'genres#edit', as: :admin_genres_edit
+    patch 'admin/genres/:id' => 'genres#update', as: :admin_genre
   end
 
   scope module: :public do
