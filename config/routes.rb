@@ -4,12 +4,7 @@ Rails.application.routes.draw do
     get 'admins' => 'homes#top'
     get 'admins/end_users' => 'end_users#index'
     get 'admins/endusers/:id' => 'end_users#show'
-    get 'admin/items' => 'items#index'
-    get 'admin/items/new' => 'items#new'
-    post 'admin/items' => 'items#create'
-    get 'admin/items/:id' => 'items#show'
-    get 'admin/items/:id/edit' => 'items#edit'
-    patch 'admin/items/:id' => 'items#update'
+    resources :items, path: '/admin/items', :except => :destroy
     get 'admin/genres' => 'genres#index'
     post 'admin/genres' => 'genres#create'
     get 'admin/genres/:id/edit' => 'genres#edit', as: :admin_genres_edit
@@ -19,8 +14,8 @@ Rails.application.routes.draw do
   scope module: :public do
     root to: 'homes#top'
     get 'about' => 'homes#about'
-    get 'items' => 'items#index'
-    get 'items/:id' => 'items#show'
+    get 'items' => 'items#index', as: :public_items
+    get 'items/:id' => 'items#show', as: :public_item
     devise_for :end_users, skip: [:registrations]
     as :end_user do
       get 'end_users/sign_up', to: 'registrations#new', as: :new_end_user_registration
