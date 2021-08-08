@@ -8,6 +8,7 @@ class EndUser < ApplicationRecord
     super && (self.is_unsubscribed == false)
   end
 
+
   validates :last_name, presence: true
   validates :first_name, presence: true
   validates :last_name_kana, presence: true
