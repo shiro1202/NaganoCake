@@ -1,15 +1,14 @@
 <div class="container">
+  <h2>商品一覧</h2>
   <div class="row">
-    <div class="col">
-    <h2>商品一覧</h2>
 
     <% @items.each do |item| %>
       <div class="card" style="width:300px;">
         <%= attachment_image_tag(item, :image) %>
         <%= item.name %>
-        <%= item.tax_included_price %>
-        <%= link_to "詳細を見る", class: 'btn btn-primary' %>
-        </div>
+        ￥<%= item.tax_included_price %>
+        <%= link_to "詳細を見る", public_item_path(item), class: 'btn btn-primary' %>
+      </div>
     <% end %>
 
   </div>

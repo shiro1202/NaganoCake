@@ -1,0 +1,32 @@
+<div class="container">
+  <div class="row">
+    <h2>ショッピングカート</h2>
+    <table class='table'>
+      <tr>
+        <th>商品名</th>
+        <th>単価(税込み)</th>
+        <th>数量</th>
+        <th>小計</th>
+        <th></th>
+      </tr>
+      <% @cart_items.each do |cart_item| %>
+      <tr>
+        <% item = cart_item.item %>
+        <td>
+          <%= attachment_image_tag(item, :image, :fill, 30, 30) %><%= item.name %>
+        </td>
+        <td>
+          <%= item.tax_included_price %>
+        </td>
+        <td>
+          <%= cart_item.amount %>
+        </td>
+        <td>
+          <%= item.tax_included_price * cart_item.amount %>
+        </td>
+      </tr>
+      <% end %>
+    </table>
+
+  </div>
+</div>
