@@ -17,9 +17,9 @@ Rails.application.routes.draw do
     get 'items' => 'items#index', as: :public_items
     get 'items/:id' => 'items#show', as: :public_item
     get 'cart_items' => 'cart_items#index', as: :cart_items
-    patch 'cart_items/:id' => 'cart_items#update'
-    delete 'cart_items/:id' => 'cart_items#destroy'
+    patch 'cart_items/:id' => 'cart_items#update', as: :cart_item
     delete 'cart_items/destroy_all' => 'cart_items#destroy_all'
+    delete 'cart_items/:id' => 'cart_items#destroy'
     post 'cart_items' => 'cart_items#create'
     devise_for :end_users, skip: [:registrations]
     as :end_user do
