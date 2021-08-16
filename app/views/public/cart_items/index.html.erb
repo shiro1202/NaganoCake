@@ -2,7 +2,7 @@
   <div class="row">
     <h2>ショッピングカート</h2>
     <div class = 'pull-right'>
-      <%= link_to "カートを空にする", cart_items_destroy_all_path, method: :delete, class: "btn btn-danger" %>
+      <%= link_to "カートを空にする", cart_items_destroy_all_path, method: :delete, class: "btn btn-danger", data: {confirm:"本当に削除しますか？"}%>
     </div>
 
     <table class='table'>
@@ -42,7 +42,7 @@
       <% end %>
     </table>
 
-    <%= link_to "買い物を続ける", public_items_path, class: "btn btn-primary" %>
+    <%= link_to "買い物を続ける", end_users_path, class: "btn btn-primary" %>
     <table class = "pull-ri">
       <tr>
         <th>合計金額</th>
