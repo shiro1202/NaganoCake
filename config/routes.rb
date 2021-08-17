@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  namespace :admin do
+    get 'orders/show'
+    get 'orders/update'
+  end
   scope module: :admin do
     devise_for :admins
     get 'admins' => 'homes#top'
@@ -31,6 +35,13 @@ Rails.application.routes.draw do
     get 'end_users/edit' => 'end_users#edit'
     get 'end_users/confirm' => 'end_users#confirm'
     patch 'end_users/withdraw' => 'end_users#withdraw'
+    get 'orders/new' => 'orders#new'
+    post 'orders/comfirm' => 'orders#comfirm'
+    get 'orders/complete' => 'orders#complete'
+    post 'orders' => 'orders#create'
+    get 'orders' => 'orders#index'
+    get 'orders/:id' => 'orders#show', as: :order
+    resources :addresses, :except => :new
   end
 
 
