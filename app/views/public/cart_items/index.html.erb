@@ -18,7 +18,7 @@
       <tr>
         <% item = cart_item.item %>
         <td>
-          <%= attachment_image_tag(item, :image, :fill, 30, 30) %><%= item.name %>
+          <%= attachment_image_tag(item, :image, :width => "60", :height => "60") %><%= item.name %>
         </td>
         <td>
           <%= item.tax_included_price %>
