@@ -1,8 +1,4 @@
 Rails.application.routes.draw do
-  namespace :admin do
-    get 'orders/show'
-    get 'orders/update'
-  end
   scope module: :admin do
     devise_for :admins
     get 'admins' => 'homes#top'
@@ -13,6 +9,9 @@ Rails.application.routes.draw do
     post 'admin/genres' => 'genres#create'
     get 'admin/genres/:id/edit' => 'genres#edit', as: :admin_genres_edit
     patch 'admin/genres/:id' => 'genres#update', as: :admin_genre
+    get 'admin/orders/:id' => 'orders#show', as: :admin_order
+    patch 'admin/orders/:id' => 'orders#update'
+    patch 'admin/order_details/:id' => 'order_details#update', as: :admin_order_detail
   end
 
   scope module: :public do
@@ -43,7 +42,5 @@ Rails.application.routes.draw do
     get 'orders/:id' => 'orders#show', as: :order
     resources :addresses, :except => :new
   end
-
-
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+# For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

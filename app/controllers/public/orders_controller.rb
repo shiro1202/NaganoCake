@@ -6,8 +6,8 @@ class Public::OrdersController < ApplicationController
 
   def comfirm
     @cart_items = CartItem.where(end_user_id: current_end_user.id)
-    params[:order][:payment_method] = params[:order][:payment_method].to_i
     @order = Order.new(order_params)
+    @order.order_details.build
 
     if params[:order][:address_option] == "0"
       @order.postal_code = current_end_user.postal_code
@@ -31,8 +31,11 @@ class Public::OrdersController < ApplicationController
 
   def create
     @order = Order.new(order_params)
+    @order.end_user_id = current_end_user.id
     @order.save
-    redirect_to
+    cart_item = CartItem.where(end_user_id: current_end_user.id)
+    cart_item.destroy_all
+    redirect_to orders_complete_path
   end
 
   def index
@@ -44,7 +47,8 @@ class Public::OrdersController < ApplicationController
   private
 
   def order_params
-    params.require(:order).permit(:end_user_id, :shipping_cost, :total_payment, :name, :postal_code, :address, :payment_method, :status )
+    params.require(:order).permit(:end_user_id, :shipping_cost, :total_payment, :name, :postal_code, :address, :payment_method, :status,
+    order_details_attributes:[:id, :amount, :tax_included_price, :item_id, :order_id])
   end
 
 
