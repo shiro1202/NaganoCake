@@ -13,6 +13,17 @@
         <th>小計</th>
         <th></th>
       </tr>
+      <% if @cart_items.blank? %>
+      <tr>
+        <td>
+          <h3>カートは空です</h3>
+        </td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <% end %>
       <% @sum = 0 %>
       <% @cart_items.each do |cart_item| %>
       <tr>
@@ -40,6 +51,7 @@
         </td>
       </tr>
       <% end %>
+
     </table>
 
     <div class="col-md-8">
@@ -48,7 +60,9 @@
       ￥<%= @sum %>
     </div>
     <div class= "col-md-4">
-      <%= link_to "情報入力に進む", orders_new_path, class: "btn btn-primary" %>
+      <% if @cart_items.present? %>
+        <%= link_to "情報入力に進む", orders_new_path, class: "btn btn-primary" %>
+      <% end %>
     </div>
 
   </div>

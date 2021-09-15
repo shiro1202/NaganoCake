@@ -76,7 +76,7 @@
             <%= s.hidden_field :order_id , value: @order.id %>
           <% end %>
         <% end %>
-        <%= f.submit "注文を確定する", class: "btn btn-success mt-3 mb-3" %>
+        <%= f.submit "注文を確定する", data: {confirm: "本当によろしいですか？"}, class: "btn btn-success mt-3 mb-3" %>
       <% end %>
     </div>
   </div>

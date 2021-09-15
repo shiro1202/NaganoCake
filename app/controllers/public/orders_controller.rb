@@ -1,4 +1,6 @@
 class Public::OrdersController < ApplicationController
+  before_action :check_cart, except: [:complete]
+
   def new
     @order = Order.new
     @addresses = current_end_user.addresses
@@ -15,9 +17,9 @@ class Public::OrdersController < ApplicationController
       @order.name = current_end_user.last_name+current_end_user.first_name
 
     elsif  params[:order][:address_option] ==  "1"
-      @order.postal_code = Address.find(params[:order][:address]).postal_code
-      @order.address = Address.find(params[:order][:address]).address
-      @order.name = Address.find(params[:order][:address]).name
+      @order.postal_code = Address.find(params[:order][:add]).postal_code
+      @order.address = Address.find(params[:order][:add]).address
+      @order.name = Address.find(params[:order][:add]).name
 
     elsif params[:order][:address_option] ==  "2"
       @order.postal_code = params[:order][:postal_code]
@@ -51,5 +53,11 @@ class Public::OrdersController < ApplicationController
     order_details_attributes:[:id, :amount, :tax_included_price, :item_id, :order_id])
   end
 
+  def check_cart
+    @cart_items = CartItem.where(end_user_id: current_end_user.id)
+    if @cart_items.blank?
+      redirect_to cart_items_path
+    end
+  end
 
 end
